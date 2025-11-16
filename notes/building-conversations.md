@@ -64,7 +64,7 @@ respond with: "I am sorry, I am not allowed to provide financial advice.
 
 ### System vs assistant vs user - What is the best place to provide example?
 
-* System -> Important template formatting
+* System -> Important template formatting, guardrails, prompt injection protection
 
   For example:
 
@@ -73,7 +73,7 @@ respond with: "I am sorry, I am not allowed to provide financial advice.
   field_one | field_two | field_three
   When the user asks questions unrelated to formatting, respond with 'I am not allowed to answer'
   ```
-* User -> Context required for new input
+* User -> Context required for new input, interpreted by LLM before coming up with a response
 
 For example:
 
@@ -81,7 +81,7 @@ For example:
   Help me format this text to pipe delimited values: userA, userB, userC
   ```
 
-* Assistant -> Example conversations
+* Assistant -> Example conversations, help retain context / conversation history
 
 For example:
 
@@ -98,3 +98,11 @@ returns: I am not allowed to answer
 - More examples provide the application more structure and more accurate responses.
 
 In a new system configuration, it is always advised to include as many "user-assistant" pairs as possible.
+
+## What is tool calling in LLM?
+
+* When LLM has to fetch real-time data, it makes an external tool call to a service to fetch latest information.
+* When it does this, even if it doesn't have direct training data, it will be able to fetch latest information
+  without being pre-trained.
+* When LLM has to fetch static data that doesn't change, it uses its training data. The parameters for making
+  training data calls vs external tool calls is base lined with the model was trained.
