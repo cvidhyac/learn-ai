@@ -7,8 +7,8 @@ There are two types of conversations:
 
 ### What is a single turn conversation?
 
-In the examples [Sentiment classification](../practice/learn-sentiment-classification.py) and
-[LLM Temperature analysis](../practice/learn-temperatures.py), we only provided one input
+In the examples [Sentiment classification](../practice/learn_sentiment_classification.py) and
+[LLM Temperature analysis](../practice/learn_temperatures.py), we only provided one input
 and there was one output.
 
 ### What is a multi-turn conversation?

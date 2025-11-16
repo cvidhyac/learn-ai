@@ -1,0 +1,144 @@
+# ============================================================================
+# Project Metadata
+# ============================================================================
+[project]
+name = "learn-ai"
+version = "0.1.0"
+description = "Learning AI and LLM concepts with practical examples"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    {name = "Vidhya Chidambaram", email = "vchidamb@example.com"}
+]
+
+# Keywords for discoverability (if publishing to PyPI)
+keywords = ["ai", "llm", "openai", "learning", "chatgpt"]
+
+# PyPI classifiers (https://pypi.org/classifiers/)
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14"
+]
+
+# ============================================================================
+# Runtime Dependencies
+# These are installed when you `pip install` the project
+# ============================================================================
+dependencies = [
+    "openai>=1.0.0",
+    "python-dotenv>=1.0.0",
+]
+
+# ============================================================================
+# Optional Dependencies (Development, Testing, etc.)
+# Install with: pip install -e ".[dev]"
+# ============================================================================
+[project.optional-dependencies]
+dev = [
+    # Code formatting
+    "black>=24.0.0",
+    "ruff>=0.6.0",
+
+    # Type checking
+    "mypy>=1.0.0",
+
+    # Testing
+    "pytest>=8.0.0",
+    "pytest-cov>=4.0.0",
+
+    # Pre-commit hooks
+    "pre-commit>=3.0.0",
+]
+
+# ============================================================================
+# Build System
+# Tells pip how to install your project
+# ============================================================================
+[build-system]
+requires = ["setuptools>=68.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+# ============================================================================
+# Package Discovery
+# Tell setuptools which directories contain Python packages
+# ============================================================================
+[tool.setuptools.packages.find]
+where = ["."]           # Look in the root directory
+include = ["practice*"] # Only include practice package
+exclude = [             # Explicitly exclude these
+    "tests*",
+    "notes*",
+    "*.tests*",
+    "*.tests",
+]
+
+# ============================================================================
+# Tool Configurations
+# ============================================================================
+
+# Ruff - Fast Python linter and formatter (replacement for flake8, isort, etc.)
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+# Enable specific linting rules
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort (import sorting)
+    "N",   # pep8-naming
+    "UP",  # pyupgrade (modern Python syntax)
+    "B",   # flake8-bugbear (common bugs)
+    "C4",  # flake8-comprehensions
+]
+
+ignore = [
+    "E501",  # Line too long (handled by formatter)
+]
+
+# Exclude files/directories
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]  # Allow unused imports in __init__.py
+
+# Black - Code formatter
+[tool.black]
+line-length = 120
+target-version = ['py310', 'py311', 'py312']
+include = '\.pyi?$'
+
+# Mypy - Static type checker
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false  # Set to true for stricter typing
+ignore_missing_imports = true  # Ignore missing type stubs for now
+
+# Pytest - Testing framework
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_functions = "test_*"
+addopts = [
+    "--verbose",
+    "--cov=practice",
+    "--cov-report=term-missing",
+]
+
+# Coverage - Code coverage settings
+[tool.coverage.run]
+source = ["practice"]
+omit = [
+    "*/tests/*",
+    "*/__pycache__/*",
+    "*/.venv/*",
+]
+
+[tool.coverage.report]
+precision = 2
+show_missing = true
+skip_covered = false
