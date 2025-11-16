@@ -2,10 +2,7 @@
 See notes/building-conversations.md for a detailed explanation on llm roles.
 """
 
-import os
-
 from dotenv import load_dotenv
-from openai import OpenAI
 from openai.types.chat import (
     ChatCompletionAssistantMessageParam,
     ChatCompletionMessageParam,
@@ -13,8 +10,18 @@ from openai.types.chat import (
     ChatCompletionUserMessageParam,
 )
 
+from practice.api_client import SimpleOpenApiClient, SimpleOpenApiClientBuilder
+
 # Load environment variables from .env file
 load_dotenv()
+
+api_client: SimpleOpenApiClient = (
+    SimpleOpenApiClientBuilder()
+    .with_model("ibm-granite/granite-4.0-h-micro")
+    .with_max_completion_tokens(250)
+    .with_temperature(1)
+    .build()
+)
 
 """
 Execute a prompt with given user and system role messages
@@ -22,10 +29,8 @@ Execute a prompt with given user and system role messages
 
 
 def execute_prompt(input_msg: list[ChatCompletionMessageParam]):
-    client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.getenv("OPENAI_API_KEY"))
-    response = client.chat.completions.create(
-        model="ibm-granite/granite-4.0-h-micro", max_completion_tokens=250, temperature=1, messages=input_msg
-    )
+    response = api_client.chat_completion(messages=input_msg)
+
     print(response.choices[0].message.content)
     print("------- end prompt execution -------------")
 
