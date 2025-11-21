@@ -37,16 +37,68 @@
 
 - Model trains itself by spotting patterns or groups of data
 - Some clustering algorithms like K-means require to specify clusters ahead of time
-- DBSCAN: Density based spatial clustering of applications with noise, doesn't require clusters to be specified in advance.
+- DBSCAN: Density based spatial clustering of applications with noise, doesn't require clusters to be specified in
+  advance.
 - Instead define what makes a cluster and minimum number of observations in one cluster.
 
 ## Anomaly detection
+
 - Find outliers. Outliers are observations that significantly differ from normal patterns. Eg. Error code
 
 ## Association
--  Find relationship between observations. Which objects are bought together? For example, people that bought bread
-are more likely to buy butter, cheese or peanuts along with it in their shopping list.
+
+- Find relationship between observations. Which objects are bought together? For example, people that bought bread
+  are more likely to buy butter, cheese or peanuts along with it in their shopping list.
 
 ## Common issues while evaluating a model's performance
+
 - Overfitting: Model performs well on training data set but is unable to perform on test data set because the features
-were highly customized for perfect classification that can't be done with real-time data.
+  were highly customized for perfect classification that can't be done with real-time data.
+- Accuracy - number of correct predictions / total observations
+- Sensitivity - a measure of overall true positives, false positives and false negatives.
+- Error: The distance between the point (actual) and the line (expected)
+
+## Improving model performance
+
+3 Terms: Dimensionality reduction, Hyperparameter tuning, Ensemble methods
+
+- Dimensionality reduction: Reduce the number of features - more features can make it more complex and error-prone if
+  correlation between features is very low.
+- Hyperparameter tuning: Imagine the machine learning model is like a music console, depending on the genre of
+  music to be produced it needs different settings to produce good music. In this case, data set is like the genre.
+- Ensemble methods: The word "ensemble" means a group of dancers/musicians that perform together. Ensemble methods take
+  the same idea, we will use different models to achieve consensus on a prediction either by taking best of three or
+  averaging depending on regression use case.
+
+## Deep Learning
+
+- Uses neural networks similar to how human brain works.
+- Best suited for unstructured data like large amount of text or images.
+- Due to the unstructured nature, this needs large amount of computing power to get effective results.
+
+### Deep learning process
+Data acquisition process for deep learning process happens through:
+- Computer vision: to visually receive the data on images to see and understand image content (self-driving cars)
+- Sensors: Like temperature data, fire-alarms, smoke-alarms (gather features and data)
+- Robotics: touch and perception
+- Natural Language processing: To process conversations
+- Machine Learning: To process the data from everything
+
+## Natural Language processing
+- The goal of NLP is to understand human language
+- Many NLP techniques and algorithms exist - for example: bag of n-grams, word embeddings etc.,
+
+## Challenges in deep learning space
+A lot of deep learning models commercially developed are black box models. We get the model performance data, but
+we do not know what data was used for training the data, and why it arrives at a specific prediction.
+
+### Explainability
+- Why did this model make this prediction?
+- xAI : Explainable AI - Improve democratization of data
+- Be transparent about the data and explain how the model applies reasoning
+- Bias detection
+
+### Interpretability
+- How did this model arrive at this prediction?
+- Understand the inner details of the model, its weights and technical details of what makes it a good model
+- For a lot of black box models, the weights are not open source.
