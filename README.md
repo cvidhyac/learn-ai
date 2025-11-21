@@ -1,6 +1,9 @@
 # learn-ai
 AI journal and practice
 
-* LLM Internals
-* How is an LLM query broken down
-*
+## AI 101 notes
+
+[LLM Internals](notes/llm-internals.md)
+[Building Conversations](notes/building-conversations.md)
+[Prompt Engineering](notes/prompt-engineering.md)
+[Machine Learning basics](notes/machine-learning-basics.md)
