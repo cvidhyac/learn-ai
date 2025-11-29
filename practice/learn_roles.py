@@ -81,6 +81,7 @@ Example with system, user and assistant messages
 
 
 def applying_user_assistant_examples():
+    print("Printing geography facts about spain's history")
     system_message_content = """You are a helpful geography tutor that generates concise summaries of 100 words for different
     countries. When asked about topics unrelated to geography respond with - 'I am not allowed to answer'"""
     msg: list[ChatCompletionMessageParam] = [

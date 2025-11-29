@@ -1,10 +1,12 @@
 import os
+from collections.abc import Iterable
 
 from dotenv import load_dotenv
 from openai import OpenAI
 from openai.types.chat import (
     ChatCompletion,
     ChatCompletionAssistantMessageParam,
+    ChatCompletionFunctionToolParam,
     ChatCompletionMessageParam,
     ChatCompletionSystemMessageParam,
     ChatCompletionUserMessageParam,
@@ -23,6 +25,7 @@ class SimpleOpenApiClient:
     model: str
     temperature: float
     max_completion_tokens: int
+    tools: Iterable[ChatCompletionFunctionToolParam] | None
 
     def __init__(self):
         pass
@@ -32,6 +35,8 @@ class SimpleOpenApiClient:
             model=self.model,
             temperature=self.temperature,
             max_completion_tokens=self.max_completion_tokens,
+            tool_choice="auto",
+            tools=self.tools,
             messages=messages,
         )
 
@@ -66,6 +71,7 @@ class SimpleOpenApiClientBuilder:
         self._api_key: str | None = None
         self._timeout: int | None = None
         self._client: OpenAI | None = None
+        self._tools: Iterable[ChatCompletionFunctionToolParam] | None = None
 
     def with_model(self, model: str) -> "SimpleOpenApiClientBuilder":
         self._model = model
@@ -91,9 +97,13 @@ class SimpleOpenApiClientBuilder:
         self._timeout = timeout
         return self
 
+    def with_tools(self, tools: Iterable[ChatCompletionFunctionToolParam]) -> "SimpleOpenApiClientBuilder":
+        self._tools = tools
+        return self
+
     def build(self) -> SimpleOpenApiClient:
-        api_key = self._api_key or os.getenv("OPENAI_API_KEY")
-        base_url = self._base_url or os.getenv("OPENAI_URL")
+        api_key = self._api_key or os.getenv("OPEN_ROUTER_API_KEY")
+        base_url = self._base_url or os.getenv("OPEN_ROUTER_BASE_URL")
 
         if not api_key:
             raise ValueError("API key is required")
@@ -105,6 +115,7 @@ class SimpleOpenApiClientBuilder:
         client_instance.model = self._model
         client_instance.temperature = self._temperature
         client_instance.max_completion_tokens = self._max_completion_tokens
+        client_instance.tools = self._tools
 
         openai_dict: dict[str, str | int] = {
             "base_url": base_url,

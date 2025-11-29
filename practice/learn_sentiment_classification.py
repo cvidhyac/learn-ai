@@ -63,13 +63,18 @@ sentiment classification is interpreted by LLM
 
 def execute_prompt(client, prompt):
     response = client.chat.completions.create(
-        model="gpt-4o-mini", messages=[{"role": "user", "content": prompt}], max_completion_tokens=300, temperature=1
+        model="meta-llama/llama-3.3-70b-instruct:free",
+        messages=[{"role": "user", "content": prompt}],
+        max_completion_tokens=300,
+        temperature=1,
     )
     print(response.choices[0].message.content)
     print("---------------end prompt execution ------------------")
 
 
 if __name__ == "__main__":
-    openai_client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.getenv("OPENAI_API_KEY"))
+    url = os.getenv("OPEN_ROUTER_BASE_URL")
+    key = os.getenv("OPEN_ROUTER_API_KEY")
+    openai_client = OpenAI(base_url=url, api_key=key)
     basic_few_shot_prompting(openai_client)
     improved_few_shot_prompting(openai_client)

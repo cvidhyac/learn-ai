@@ -10,4 +10,20 @@ text, image, audio and/or video in contrast to only single-mode (e.g only text s
 If a model support visual answering, then it can be classified as multi-modal.
 Eg: "Describe this zebra by looking at its picture"
 
+## 5 Stages
+- Text Pre-Processing
+- Text Representation
+- Pre-Training
+- Fine-Tuning
+- Advanced Fine-Tuning
+
+![Five Stages of LLM](attachments/five-stages-of-llm.png)
+
 ### What happens when a query is sent to LLM?
+
+- Broken down into tokens
+- Each token is then used to generate word embeddings
+- Positional / byte pair encoding is done
+- Vectorization
+- Next word prediction is done based on vector
+- Logits
